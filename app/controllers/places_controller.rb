@@ -6,7 +6,7 @@ class PlacesController < ApplicationController
 
   def show
     @place = Place.find_by({ "id" => params["id"] })
-    @entries = @place.entries.where(user: current_user)
+    @entries = current_user ? @place.entries.where(user: current_user) : Entry.none
   end
 
   def new
